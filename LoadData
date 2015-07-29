@@ -12,4 +12,7 @@
 >  LOAD DATA LOCAL INFILE '/path/myDocuments/MyFile.csv' INTO TABLE `myTable`
    FIELDS TERMINATED BY '\t'
    LINES TERMINATED BY '\n'
+   
+#Drop multiple column#
+alter table stageData drop col1, drop col2;
 
