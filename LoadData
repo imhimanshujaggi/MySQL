@@ -1,19 +1,14 @@
-####Launching MySQL from shell####
-> mySql
 
-#### Connect to Server and Database. Local Infile to be used if transferring data to tables####
-
+#Connect to Server and Database. Local Infile to be used if transferring data to tables#
 > mysql -h 10.XX.XXX.12 -u username -p password myDatabaseName --local-infile
 
-####To use the Database, myDatabase####
-
+#To use the Database, myDatabase#
 > use myDatabase
 
-##### To check all the tables ####
+#To check all the tables #
 > show tables;
 
-#### Loading Data to the table ####
-
+#Loading Data to the table #
 >  LOAD DATA LOCAL INFILE '/path/myDocuments/MyFile.csv' INTO TABLE `myTable`
    FIELDS TERMINATED BY '\t'
    LINES TERMINATED BY '\n'
