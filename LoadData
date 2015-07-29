@@ -16,3 +16,10 @@
 #Drop multiple column#
 alter table stageData drop col1, drop col2;
 
+#Truncate table
+truncate table myTable;
+
+#Drop table
+drop table myTable;
+
+
