@@ -22,4 +22,6 @@ truncate table myTable;
 #Drop table
 drop table myTable;
 
+#Sort rows
+SELECT name, macID FROM pet ORDER BY macID DESC;
 
