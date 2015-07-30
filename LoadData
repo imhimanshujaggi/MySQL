@@ -9,7 +9,7 @@
 > show tables;
 
 #To display Column names from empty set
-Show col1 from myTable
+Show columns from myTable
 
 #Loading Data to the table #
 >  LOAD DATA LOCAL INFILE '/path/myDocuments/MyFile.csv' INTO TABLE `myTable`
