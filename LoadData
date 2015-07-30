@@ -26,7 +26,9 @@ drop table myTable;
 SELECT name, macID FROM pet ORDER BY macID DESC;
 
 #Finding euclidean distance
-Select s.TimeStamp, s.MacId, s.snapX, s.snapY, p.TerminalFacility from stageData s, POIData p  where  (s.snapX -p.XCoordp)*(s.snapX -p.XCoordp) + (s.snapY -p.YCoordp)*(s.snapY -p.YCoordp) <=12769 and p.type in (select type from POIData where type = 'gate') limit 1000;
+Select s.TimeStamp, s.MacId, s.snapX, s.snapY, p.TerminalFacility from stageData s, POIData p  
+where  (s.snapX -p.XCoordp)*(s.snapX -p.XCoordp) + (s.snapY -p.YCoordp)*(s.snapY -p.YCoordp) <=12769 
+and p.type in (select type from POIData where type = 'gate') limit 1000;
 
 # Creating STAGING table
  create table mapData(col1 VARCHAR(256), col2 VARCHAR(512), col3 VARCHAR(512));
