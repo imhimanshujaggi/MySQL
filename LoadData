@@ -35,3 +35,7 @@ and p.type in (select type from POIData where type = 'gate') limit 1000;
 
 # Creating STAGING table
  create table mapData(col1 VARCHAR(256), col2 VARCHAR(512), col3 VARCHAR(512));
+ 
+ #Modify exisiting table; Create new column
+ Alter table myTable Add column newCol VARCHAR(512);
+ 
