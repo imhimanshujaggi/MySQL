@@ -8,6 +8,9 @@
 #To check all the tables #
 > show tables;
 
+#To display Column names from empty set
+Show col1 from myTable
+
 #Loading Data to the table #
 >  LOAD DATA LOCAL INFILE '/path/myDocuments/MyFile.csv' INTO TABLE `myTable`
    FIELDS TERMINATED BY '\t'
