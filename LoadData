@@ -39,3 +39,13 @@ and p.type in (select type from POIData where type = 'gate') limit 1000;
  #Modify exisiting table; Create new column
  Alter table myTable Add column newCol VARCHAR(512);
  
+ # Find the nearest gate location for a user at a particular instance of time
+ select m.* from mapData m,
+ (select timeStamp, macID, MIN(POW((snapX-poiX),2+POW((snapY,poiY),2)) mindist from mapData 
+ group by timeStamp, macID) a 
+ where m.timeStamp = a.timeStamp
+ and m.macID = a.macID 
+ and POW((snapX -poiX),2)+POW((snapY -poiY),2) = a.mindist limit 10;
+ 
+ 
+ 
