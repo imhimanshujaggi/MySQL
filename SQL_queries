@@ -1,0 +1,22 @@
+#Removing duplicates from table
+#Data set looks like
+AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
+AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
+AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
+AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
+AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
+
+# to find one unique record
+
+select distinct a.* from exceptionTable a
+inner join
+(
+select FlightCode_trim, FlightNumber_Trim from exceptionTable
+group by FlightCode_trim,FlightNumber_Trim) as b
+on a.FlightCode_trim = b.FlightCode_trim
+and a.FlightNumber_Trim = b.FlightNumber_Trim
+and a.FlightNumber_Trim ='ASF259'
+
+
+# Result set
+AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
