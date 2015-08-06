@@ -22,4 +22,25 @@ and a.FlightNumber_Trim ='ASF259'
 AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
 
 
-# Maximum, minimum, top1 out per group in SQL
+#  top1 out per group in SQL; even if the group contains possible duplicates
+select b.* from 
+(select row_number() over (partition by a.FlightCode_Trim,a.FlightNumber_Trim order by a._Similarity desc) as row_number ,rank() over (partition by a.FlightCode_Trim,a.FlightNumber_Trim order by a._Similarity desc) as rn, a.FlightCode_Trim,a.FlightNumber_Trim,a._Similarity,a.refFLIGHTCODE,a.refFLIGHTNO from exceptionTable a
+group by a.FlightCode_Trim,a.FlightNumber_Trim,a._Similarity,a.refFLIGHTCODE,a.refFLIGHTNO) b
+where b.rn =1
+and b.row_number =1
+
+example:
+Date         FlightCode FlightNo Remarks             refFCode  reffNo  Similarity
+20140420	TZ	TZ01	Flight Number Unmatched	TZ	TZ201	0.8713382
+20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ201	0.8713382
+20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ201	0.8713382
+20140426	TZ	TZ01	Flight Number Unmatched	TZ	TZ201	0.8713382
+20140426	TZ	TZ01	Flight Number Unmatched	TZ	TZ301	0.8712858
+20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ301	0.8712858
+20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ301	0.8712858
+20140420	TZ	TZ01	Flight Number Unmatched	TZ	TZ301	0.8712858
+20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ5	0.6846151
+20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ95	0.6846151
+
+Date         FlightCode FlightNo Remarks             refFCode  reffNo  Similarity
+20140420	TZ	TZ01	Flight Number Unmatched	TZ	TZ201	0.8713382
