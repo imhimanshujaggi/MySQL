@@ -20,3 +20,6 @@ and a.FlightNumber_Trim ='ASF259'
 
 # Result set
 AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
+
+
+# Maximum, minimum, top1 out per group in SQL
