@@ -44,3 +44,13 @@ Date         FlightCode FlightNo Remarks             refFCode  reffNo  Similarit
 
 Date         FlightCode FlightNo Remarks             refFCode  reffNo  Similarity
 20140420	TZ	TZ01	Flight Number Unmatched	TZ	TZ201	0.8713382
+
+
+
+Updating SSI package in SQL task
+
+update t_pos 
+set t_pos.FlightCode_Trim = b.refFlightCode, t_pos.FlightNumber_Trim = b.refFlightNo, t_pos.is_record_modified =1
+from t_pos join ( select * from exceptionLookUp) b
+on t_pos.FlightCode_Trim = b.uncleanFlightCode
+and t_pos.FlightNumber_Trim = b.uncleanFlightNumber
