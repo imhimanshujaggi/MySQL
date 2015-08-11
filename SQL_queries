@@ -68,3 +68,16 @@ on e.FlightCode_Trim = c.FlightCode_Trim
 and e.FlightNumber_Trim = c.FlightNumber_Trim
 and e.Day_Formatted = c.Day_Formatted
 
+Usage of EXCEPT:
+
+select b.Day_Formatted,b.FlightCode_Trim,b.FlightNumber_Trim,b.remarks,b.refFLIGHTCODE,b.refFLIGHTNO,b._Similarity,b._Similarity_FlightCode_Trim,b.FlightNumber_Trim,b._Match from exceptiontable b
+except
+select e.Day_Formatted,e.FlightCode_Trim,e.FlightNumber_Trim,e.remarks,e.refFLIGHTCODE,e.refFLIGHTNO,e._Similarity,e._Similarity_FlightCode_Trim,e.FlightNumber_Trim,e._Match from exceptiontable e join  
+(select b.Day_Formatted,b.FlightCode_Trim, b.FlightNumber_Trim from 
+(select count(*) as cou, a.Day_Formatted, a.FlightCode_Trim,a.FlightNumber_Trim 
+from exceptionTable a
+group by a.Day_Formatted, a.FlightCode_Trim,a.FlightNumber_Trim) as b
+where b.cou = 1) as c
+on e.FlightCode_Trim = c.FlightCode_Trim
+and e.FlightNumber_Trim = c.FlightNumber_Trim
+and e.Day_Formatted = c.Day_Formatted;
