@@ -54,3 +54,17 @@ set t_pos.FlightCode_Trim = b.refFlightCode, t_pos.FlightNumber_Trim = b.refFlig
 from t_pos join ( select * from exceptionLookUp) b
 on t_pos.FlightCode_Trim = b.uncleanFlightCode
 and t_pos.FlightNumber_Trim = b.uncleanFlightNumber
+
+
+
+
+select * from exceptiontable e join  
+(select b.Day_Formatted,b.FlightCode_Trim, b.FlightNumber_Trim from 
+(select count(*) as cou, a.Day_Formatted, a.FlightCode_Trim,a.FlightNumber_Trim 
+from exceptionTable a
+group by a.Day_Formatted, a.FlightCode_Trim,a.FlightNumber_Trim) as b
+where b.cou = 1) as c
+on e.FlightCode_Trim = c.FlightCode_Trim
+and e.FlightNumber_Trim = c.FlightNumber_Trim
+and e.Day_Formatted = c.Day_Formatted
+
