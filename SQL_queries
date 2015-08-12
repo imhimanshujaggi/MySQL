@@ -1,10 +1,10 @@
 #Removing duplicates from table
 #Data set looks like
-AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
-AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
-AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
-AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
-AS	ASF259	Flight Code Unmatched	AF	AF259	0.617133	0.3125
+AS	AF259	Flight Code Unmatched	AF	A259	0.617133	0.3125
+AS	AF259	Flight Code Unmatched	AF	A259	0.617133	0.3125
+AS	AF259	Flight Code Unmatched	AF	A259	0.617133	0.3125
+AS	AF259	Flight Code Unmatched	AF	A259	0.617133	0.3125
+AS	AF259	Flight Code Unmatched	AF	A259	0.617133	0.3125
 
 # to find one unique record
 
@@ -31,16 +31,16 @@ and b.row_number =1
 
 example:
 Date         FlightCode FlightNo Remarks             refFCode  reffNo  Similarity
-20140420	TZ	TZ01	Flight Number Unmatched	TZ	TZ201	0.8713382
-20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ201	0.8713382
-20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ201	0.8713382
-20140426	TZ	TZ01	Flight Number Unmatched	TZ	TZ201	0.8713382
-20140426	TZ	TZ01	Flight Number Unmatched	TZ	TZ301	0.8712858
-20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ301	0.8712858
-20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ301	0.8712858
-20140420	TZ	TZ01	Flight Number Unmatched	TZ	TZ301	0.8712858
-20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ5	0.6846151
-20140421	TZ	TZ01	Flight Number Unmatched	TZ	TZ95	0.6846151
+20140420	TiZ	TZ001	Flight Number Unmatched	TiZ	TZ1201	0.8713382
+20140421	TiZ	TZ001	Flight Number Unmatched	TiZ	TZ1201	0.8713382
+20140421	TiZ	TZ001	Flight Number Unmatched	TiZ	TZ1201	0.8713382
+20140426	TiZ	TZ001	Flight Number Unmatched	TiZ	TZ1201	0.8713382
+20140426	TiZ	TZ001	Flight Number Unmatched	TiZ	TZ1301	0.8712858
+20140421	TiZ	TZ001	Flight Number Unmatched	TiZ	TZ1301	0.8712858
+20140421	TiZ	TZ001	Flight Number Unmatched	TiZ	TZ1301	0.8712858
+20140420	TiZ	TZ001	Flight Number Unmatched	TiZ	TZ1301	0.8712858
+20140421	TiZ	TZ001	Flight Number Unmatched	TiZ	TZ15	0.6846151
+20140421	TiZ	TZ001	Flight Number Unmatched	TiZ	TZ195	0.6846151
 
 Date         FlightCode FlightNo Remarks             refFCode  reffNo  Similarity
 20140420	TZ	TZ01	Flight Number Unmatched	TZ	TZ201	0.8713382
@@ -81,3 +81,18 @@ where b.cou = 1) as c
 on e.FlightCode_Trim = c.FlightCode_Trim
 and e.FlightNumber_Trim = c.FlightNumber_Trim
 and e.Day_Formatted = c.Day_Formatted;
+
+
+Insert into:
+
+insert into t_nullReports
+select x.Day_Formatted,x.FlightCode_Trim,x.FlightNumber_Trim,x.Area,x.Location,
+x.Terminal,x.BusinessCategory,x.ProductCategory,x.TA,
+x.TANumber,x.OutletName,x.OutletName1,x.Nationality,x.NetSales,x.remarks,x.is_record_dirty,x.is_record_modified from 
+(select * from t_pos t
+left join PAXData p
+on t.Day_Formatted =p.[DATE (YYYYMMDD)]
+and t.FlightCode_Trim =p.FLIGHTCODE
+and t.FlightNumber_Trim	 =p.FLIGHTNO) as x
+where x.FLIGHTCODE  is NULL
+
