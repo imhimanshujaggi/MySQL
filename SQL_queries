@@ -96,3 +96,20 @@ and t.FlightCode_Trim =p.FLIGHTCODE
 and t.FlightNumber_Trim	 =p.FLIGHTNO) as x
 where x.FLIGHTCODE  is NULL
 
+
+
+
+
+
+
+=====================
+
+select * from 
+(select r.Day_Formatted,r.FlightCode_Trim,r.FlightNumber_Trim,max(remarks) as remarks,max(r.refFLIGHTCODE) as refFlightCode,
+max(r.refFLIGHTNO) as refFlightNo, max(r._Similarity) as similarity, max(r._Similarity_FlightCode_Trim) as _similarityFlightcode,
+max(r._Similarity_FlightNumber_Trim) as _similarityFlightnumber,max(r._Match) as Match
+,count(refFLIGHTCODE) as cou
+from removeDuplicates r
+group by r.Day_Formatted,r.FlightCode_Trim,r.FlightNumber_Trim) x
+where x.cou > 1
+
