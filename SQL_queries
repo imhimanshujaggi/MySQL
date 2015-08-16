@@ -113,3 +113,15 @@ from removeDuplicates r
 group by r.Day_Formatted,r.FlightCode_Trim,r.FlightNumber_Trim) x
 where x.cou > 1
 
+
+
+==================================
+
+
+update POSDATA_numeric
+set POSDATA_numeric.FlightCode = b.newFlightCode
+from POSDATA_numeric join 
+(select *,substring(Flightnumber,1,2) as newFlightCode
+from [POSDATA_numeric]) b
+on POSDATA_numeric.FlightNumber = b.FlightNumber
+and POSDATA_numeric.Day = b.Day
