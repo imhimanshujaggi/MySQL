@@ -125,3 +125,17 @@ from POSDATA_numeric join
 from [POSDATA_numeric]) b
 on POSDATA_numeric.FlightNumber = b.FlightNumber
 and POSDATA_numeric.Day = b.Day
+
+=================================================================================================
+
+
+
+
+select * from [dbo].[POSDATA_numeric] p
+join temp t
+on p.FlightCode = t.newFlightCode
+and p.FlightNumber =t.FlightNumber
+and p.Day = t.DAy
+and p.TANumber = t.TANumber
+where p.FlightCode <> t.newFlightCode
+
